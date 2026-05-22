@@ -15,12 +15,9 @@ export class GeminiService {
   }
 
   private cleanMarkdownCodeBlocks(rawText: string): string {
-    const markdownRegex: RegExp =
-      /^```(?:[a-zA-Z]+)?\n([\s\S]*?)\n```$/;
+    const markdownRegex: RegExp = /^```(?:[a-zA-Z]+)?\n([\s\S]*?)\n```$/;
 
-    const match: RegExpExecArray | null = markdownRegex.exec(
-      rawText.trim(),
-    );
+    const match: RegExpExecArray | null = markdownRegex.exec(rawText.trim());
 
     let cleanedText: string = rawText;
 
@@ -37,8 +34,9 @@ export class GeminiService {
   }
 
   async generateCode(userPrompt: string): Promise<string> {
-    const optimizedPrompt: string = `Aja como um assistente de programação especialista para a disciplina de Fundamentos de Algoritmos (UEM). Sua tarefa é resolver o exercício fornecido no final deste prompt, seguindo rigorosamente o paradigma de Design de Programas, as boas práticas de um programador iniciante/intermediário cuidadoso e atendendo a TODAS as restrições de formatação e lógica de código abaixo.
+    const systemInstruction: string = `Aja como um assistente de programação especialista para a disciplina de Fundamentos de Algoritmos (UEM). Sua tarefa é resolver o exercício fornecido no final deste prompt, seguindo rigorosamente o paradigma de Design de Programas, as boas práticas de um programador iniciante/intermediário cuidadoso e atendendo a TODAS as restrições de formatação e lógica de código abaixo.
 
+Sua resposta deve conter APENAS um único bloco de código Markdown em Python solicitado. É terminantemente proibido incluir qualquer texto explicativo, introduções, saudações, conclusões ou comentários fora do bloco de código Markdown.
 Se falhar em qualquer uma das regras, a resposta será considerada incorreta.
 
 ---
@@ -100,20 +98,14 @@ Exemplos
 resultado
 '''
 
-Inclua obrigatoriamente no máximo 4 exemplos válidos de doctest.
-
----
-
-### EXERCÍCIO A SER RESOLVIDO:
-${userPrompt}`;
+Inclua obrigatoriamente no máximo 4 exemplos válidos de doctest.`;
 
     const response = await this.ai.models.generateContent({
-      model: "gemini-2.5-flash",
-      contents: optimizedPrompt,
+      model: "gemini-3.5-flash",
+      contents: userPrompt,
       config: {
         temperature: 0.1,
-        systemInstruction:
-          "Você é um compilador e gerador de código estrito baseado rigorosamente nas regras e passos fornecidos no prompt do usuário. Sua resposta deve conter APENAS um único bloco de código Markdown em Python solicitado. É terminantemente proibido incluir qualquer texto explicativo, introduções, saudações, conclusões ou comentários fora do bloco de código Markdown.",
+        systemInstruction: systemInstruction,
       },
     });
 
@@ -123,8 +115,7 @@ ${userPrompt}`;
       throw new Error("Resposta da IA está vazia.");
     }
 
-    const cleanedCode: string =
-      this.cleanMarkdownCodeBlocks(rawResponseText);
+    const cleanedCode: string = this.cleanMarkdownCodeBlocks(rawResponseText);
 
     return cleanedCode;
   }
