@@ -98,6 +98,10 @@ Exemplos
 resultado
 '''
 
+Quando for criar os testes na docstring, nos exercciiso, crie nomes genericos, exemplo: exericico fala sobre livro, coloque os nomes dos livros de livro1, livro2 etc, caso seja algum objeto, objeto1, objeto2 e assim para outros tipos de exercicios.
+
+Voce tabem podera criar matrizes em python seguindo as regras acima, as matrizem podem receber tipos compostos e enumerados, fique atento a esse ponto.
+
 Inclua obrigatoriamente no máximo 4 exemplos válidos de doctest.`;
 
     const response = await this.ai.models.generateContent({
