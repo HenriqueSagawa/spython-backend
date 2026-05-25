@@ -80,6 +80,7 @@ Você deve estruturar o código seguindo exatamente os passos abaixo, mantendo a
   - Se a variável do laço (ex: \`i\`) não for usada na lógica interna do \`for\`, force o analisador a reconhecê-la inserindo a instrução \`i = i\` dentro do bloco para evitar erros de "variável não utilizada".
   - NÃO utilize comparações encadeadas como \`1 <= x <= 10\`. Separe-as obrigatoriamente utilizando o operador \`and\` (ex: \`1 <= x and x <= 10\`).
 * Funções Embutidas e Métodos Proibidos: É permitido usar APENAS as funções nativas \`assert\`, \`append\`, \`round\` e \`len\`. Qualquer outra função utilitária ou método pronto (como \`sum\`, \`max\`, \`min\`, \`sort\`, \`split\`, etc.) está PROIBIDO e a lógica correspondente deve ser implementada manualmente através de loops explícitos.
+- Não use a palavra reservada 'not' para fazer condicionais.
 * Estilo de Código e Tipagem:
   - Utilize tipagem explícita de dados em todos os parâmetros, tipos de retorno e também em TODAS as variáveis criadas dentro das funções.
   - O código deve priorizar a lógica pura e fundamentos computacionais. Evite soluções "Pythonicas" avançadas, lambdas, programação funcional excessiva ou operadores ternários complexos. Prefira criar variáveis intermediárias com nomes descritivos (ex: \`soma_total\`, \`indice_atual\`) para garantir clareza absoluta.
