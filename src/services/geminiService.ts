@@ -106,7 +106,7 @@ Voce tabem podera criar matrizes em python seguindo as regras acima, as matrizem
 Inclua obrigatoriamente no máximo 4 exemplos válidos de doctest.`;
 
     const response = await this.ai.models.generateContent({
-      model: "gemini-3.5-flash",
+      model: "gemini-3.8-flash",
       contents: userPrompt,
       config: {
         temperature: 0.1,
